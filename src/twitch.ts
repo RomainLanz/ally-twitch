@@ -14,49 +14,49 @@ export class TwitchDriver extends Oauth2Driver<TwitchToken, TwitchScopes> {
   /**
    * The URL to hit to exchange the authorization code for the access token
    */
-  accessTokenUrl = 'https://id.twitch.tv/oauth2/token'
+  protected accessTokenUrl = 'https://id.twitch.tv/oauth2/token'
 
   /**
    * The URL for the redirect request. The user will be redirected on this page
    * to authorize the request.
    */
-  authorizeUrl = 'https://id.twitch.tv/oauth2/authorize'
+  protected authorizeUrl = 'https://id.twitch.tv/oauth2/authorize'
 
   /**
    * The URL to hit to get the user details
    */
-  userInfoUrl = 'https://api.twitch.tv/helix/users'
+  protected userInfoUrl = 'https://api.twitch.tv/helix/users'
 
   /**
    * The param name for the authorization code
    */
-  codeParamName = 'code'
+  protected codeParamName = 'code'
 
   /**
    * The param name for the error
    */
-  errorParamName = 'error'
+  protected errorParamName = 'error'
 
   /**
    * Cookie name for storing the "twitch_oauth_state"
    */
-  stateCookieName = 'twitch_oauth_state'
+  protected stateCookieName = 'twitch_oauth_state'
 
   /**
    * Parameter name to be used for sending and receiving the state
    * from Twitch
    */
-  stateParamName = 'state'
+  protected stateParamName = 'state'
 
   /**
    * Parameter name for defining the scopes
    */
-  scopeParamName = 'scope'
+  protected scopeParamName = 'scope'
 
   /**
    * Scopes separator
    */
-  scopesSeparator = ' '
+  protected scopesSeparator = ' '
 
   constructor(
     ctx: HttpContext,
@@ -67,7 +67,7 @@ export class TwitchDriver extends Oauth2Driver<TwitchToken, TwitchScopes> {
     this.loadState()
   }
 
-  configureRedirectRequest(request: RedirectRequestContract<TwitchScopes>) {
+  protected configureRedirectRequest(request: RedirectRequestContract<TwitchScopes>) {
     request.scopes(this.config.scopes || ['user:read:email'])
     request.param('response_type', 'code')
     request.param('grant_type', 'authorization_code')
@@ -76,9 +76,9 @@ export class TwitchDriver extends Oauth2Driver<TwitchToken, TwitchScopes> {
   /**
    * Returns the HTTP request with the authorization header set
    */
-  getAuthenticatedRequest(url: string, token: string) {
+  protected getAuthenticatedRequest(url: string, token: string) {
     const request = this.httpClient(url)
-    request.header('Authorization', `Bearer ${token}`)
+    request.header('Authorization', `Bearer ${token} `)
     request.header('Client-id', this.config.clientId)
     request.header('Accept', 'application/json')
     request.parseAs('json')
@@ -88,7 +88,7 @@ export class TwitchDriver extends Oauth2Driver<TwitchToken, TwitchScopes> {
   /**
    * Fetches the user info from the Twitch API
    */
-  async getUserInfo(token: string, callback?: (request: ApiRequestContract) => void) {
+  protected async getUserInfo(token: string, callback?: (request: ApiRequestContract) => void) {
     const request = this.getAuthenticatedRequest(this.userInfoUrl, token)
     if (typeof callback === 'function') {
       callback(request)
