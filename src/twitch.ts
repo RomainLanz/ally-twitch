@@ -97,14 +97,12 @@ export class TwitchDriver extends Oauth2Driver<TwitchToken, TwitchScopes> {
     const body = await request.get()
     const user = body.data[0]
 
-    console.log(user)
-
     return {
       id: user.id,
       nickName: user.login,
       name: user.display_name,
       email: user.email,
-      emailVerificationState: user.email_verified,
+      emailVerificationState: 'unsupported' as const,
       avatarUrl: user.profile_image_url,
       original: user,
     }
