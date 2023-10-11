@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/2793951/274164624-71dc1d17-59be-4ccc-95ef-72d28ae8f8a8.png" alt="@rlanz/ally-twitch">
+  <img src="https://github.com/RomainLanz/ally-twitch/assets/2793951/d3ccf29b-6169-4563-b932-5b15258a7fa3" alt="@rlanz/ally-twitch">
 </p
 
 <p align="center">
