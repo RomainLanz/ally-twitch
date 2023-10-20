@@ -23,3 +23,21 @@ Next, configure the package by running the following command.
 ```bash
 node ace configure @rlanz/ally-twitch
 ```
+
+Then register the service inside the configuration file `config/ally.ts`.
+
+```ts
+// config/ally.ts
+import { defineConfig } from '@adonisjs/ally';
+import { twitch } from '@rlanz/ally-twitch'
+import env from '#start/env';
+
+const allyConfig = defineConfig({
+  twitch: twitch({
+    clientId: env.get('TWITCH_CLIENT_ID'),
+    clientSecret: env.get('TWITCH_CLIENT_SECRET'),
+    callbackUrl: env.get('TWITCH_CALLBACK_URL'),
+    scopes: ['user:read:email']
+  }),
+})
+```
