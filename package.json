@@ -21,6 +21,7 @@
     "./types": "./build/types/main.js"
   },
   "scripts": {
+    "prepublishOnly": "npm run build",
     "build": "npm run compile",
     "clean": "del-cli build",
     "compile": "npm run clean && tsc",
