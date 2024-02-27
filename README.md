@@ -8,7 +8,7 @@
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/npm/l/@rlanz/ally-twitch.svg?style=flat-square" alt="License"></a>
 </p>
 
-`@rlanz/ally-twitch` is a Twitch driver for [AdonisJS Ally](https://v6-alpha.adonisjs.com/docs/social_auth).
+`@rlanz/ally-twitch` is a Twitch driver for [AdonisJS Ally](https://docs.adonisjs.com/guides/social-auth).
 
 ## Getting Started
 
@@ -28,16 +28,16 @@ Then register the service inside the configuration file `config/ally.ts`.
 
 ```ts
 // config/ally.ts
-import { defineConfig } from '@adonisjs/ally';
+import { defineConfig } from '@adonisjs/ally'
 import { twitch } from '@rlanz/ally-twitch'
-import env from '#start/env';
+import env from '#start/env'
 
 const allyConfig = defineConfig({
   twitch: twitch({
     clientId: env.get('TWITCH_CLIENT_ID'),
     clientSecret: env.get('TWITCH_CLIENT_SECRET'),
     callbackUrl: env.get('TWITCH_CALLBACK_URL'),
-    scopes: ['user:read:email']
+    scopes: ['user:read:email'],
   }),
 })
 ```
